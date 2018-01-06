@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="1280"
+        Title="RevViewer - Ceneo.pl" Height="Auto" Width="1280"
     WindowState="Maximized">
 
 
@@ -22,19 +22,35 @@
         <Grid 
             Grid.Row="0"
             Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <CheckBox x:Name="SearchByID" Content="Search by ID" Margin="10, 10, 0, 0" IsChecked="True"/>
-                <TextBox x:Name="TextBox_Search" HorizontalAlignment="Left" Margin="10, 10 ,0 ,0" TextWrapping="Wrap" Text="39684857" VerticalAlignment="Top" Height="30" Width="300"/>
-                <Button Content="ETL" HorizontalAlignment="Left" Margin="10, 10 ,0 ,0" VerticalAlignment="Top" Width="75" Click="Button_ETL_Click" Height="30"/>
-                <fa:ImageAwesome x:Name="LoadingSpinner"  Margin="10, 10 ,0 ,0"  Icon="Spinner" Spin="True" SpinDuration="4" Visibility="Visible" Height="30" Width="30"/>
-                <Label  Margin="10, 10 ,0 ,0" Content="{Binding PagerReviewNumber, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
-                <Button Content="E" Width="75" Click="Button_E_Click" IsEnabled="{Binding ElementName=SearchByID, Path=IsChecked}"/>
-                <Button Content="T" Width="75" Click="Button_T_Click" IsEnabled="True"/>
-                <Button Content="L" Width="75" Click="Button_L_Click" IsEnabled="False"/>
-                <Button Content="Show data from database" Width="75" Click="Button_Show_Data_Click" IsEnabled="True"/>
-                <Button Content="Clear database" Width="75" Click="Button_Clear_Database_Click" IsEnabled="True"/>
+
+            <DockPanel Background="Orange">
+
                 
-            </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,5,0,5">
+                    <CheckBox VerticalAlignment="Center" x:Name="SearchByID" Content="Search by ID"  IsChecked="{Binding IsSearchByIdChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="5,0,0,0" x:Name="TextBox_Search" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="32" Width="300"/>
+                    <Button Margin="5,0,0,0" Content="Search" Command="{Binding SearchCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"   Height="32"/>
+                    <fa:ImageAwesome Margin="5,0,0,0" x:Name="LoadingSpinner"   Icon="Spinner" Spin="True" SpinDuration="4" Visibility="{Binding LoadingSpinnerVisibility}" Height="32" Width="32"/>
+                    <TextBlock Margin="5,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding ProgressText}" Width="100"/>
+                </StackPanel>
+                
+                <Border HorizontalAlignment="Center" BorderBrush="{Binding ProcessButtonsPanelBorderBrushColor}" Background="{Binding ProcessButtonsPanelBorderBrushColor}" BorderThickness="5" >
+                    <StackPanel Orientation="Horizontal" Height="32">
+                        <Button Content="ETL" Width="75" Command="{Binding ETLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  IsEnabled="{Binding IsEAllowed}"/>
+                        <Button Margin="5,0,0,0" Content="E" Width="75" Command="{Binding ExtractDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" IsEnabled="{Binding IsEAllowed}"/>
+                        <Button Content="T" Width="75" Command="{Binding TransformDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  IsEnabled="{Binding IsTAllowed}"/>
+                        <Button Content="L" Width="75" Command="{Binding LoadDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" IsEnabled="{Binding IsLAllowed}"/>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                    <Button Content="Show database" Command="{Binding ShowDatabaseCommand}" Width="100" IsEnabled="True" Margin="0,0,5,0"/>
+                    <Button Content="Clear database" Command="{Binding ClearDatabaseCommand}" Width="100" IsEnabled="True" Margin="0,0,5,0"/>
+                    <Button Content="Welcome page" Command="{Binding GoToWelcomePageCommand}" Width="100" IsEnabled="True"/>
+                </StackPanel>
+
+            </DockPanel>
+
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1">
@@ -46,7 +62,13 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="ListedResults" Visibility="Collapsed" Grid.Column="0"  Grid.Row="0">
+            <Grid x:Name="WelcomeView" Visibility="{Binding WelcomePageVisibility}" Grid.Row="0" Grid.Column="0">
+                <Grid Margin="5">
+                    <TextBlock Text="Welcome in Reviews Application. You can blah blah..." />
+                </Grid>
+            </Grid>
+
+            <Grid x:Name="ListedResults" Visibility="{Binding ProductsVisibility}" Grid.Column="0"  Grid.Row="0">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -55,27 +77,58 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    
-                    <DataGrid Grid.Column="0" Grid.Row="0"
-                        SelectedCellsChanged="dataGrid_SelectedCellsChanged" IsReadOnly="True" x:Name="dataGrid" 
-                              ItemsSource="{Binding Path=ProductList, Mode=TwoWay}" HorizontalAlignment="Left" 
-                              Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="Auto"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Reviews Count" Binding="{Binding Path=Name}" >
-                                <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                </Style>
-                                </DataGridTextColumn.ElementStyle>
 
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Reviews Count" Binding="{Binding Path=ReviewsCount}">
+                    <DataGrid Grid.Column="0" Grid.Row="0"
+                              IsReadOnly="True" x:Name="dataGrid"  
+                              ItemsSource="{Binding ProductCollection, Mode=TwoWay}" HorizontalAlignment="Left" 
+                              VerticalAlignment="Top" Width="Auto" GridLinesVisibility="Horizontal" 
+                              AutoGenerateColumns="False">
+                        <DataGrid.InputBindings>
+                            <MouseBinding
+                                MouseAction="LeftDoubleClick"
+                                Command="{Binding ProductClickCommand}" 
+                                CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" />
+                        </DataGrid.InputBindings>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="200" Header="Product ID" Binding="{Binding Path=ProductID}" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextBlock.FontSize" Value="18"  />
+                                    </Style> 
+                                </DataGridTextColumn.ElementStyle>
+
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Path=Name}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextBlock.FontSize" Value="22"  />
+                                        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="300" Header="Reviews Count" Binding="{Binding Path=ReviewsCount}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextBlock.FontSize" Value="24"  />
+                                        <Setter Property="TextBlock.Foreground" Value="Blue" />
+                                        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=ReviewsCount}" Value="0">
+                                                <Setter Property="TextBlock.Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
@@ -84,8 +137,20 @@
 
                     <StackPanel Grid.Column="0" Grid.Row="1">
                         <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
-                            <Button x:Name="Button_Previous" Content="Previous" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="Button_Previous_Click"/>
-                            
+                            <Button x:Name="Button_Previous"  Content="Previous" 
+                                    HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" 
+                                    Command="{Binding PreviousPageCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentPage}" Value="Page: 1">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0}/{1}">
@@ -94,27 +159,34 @@
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
-                            
-                            <Button x:Name="Button_Next" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Click="Button_Next_Click"/>
+
+                            <Button x:Name="Button_Next" Content="Next" Command="{Binding NextPageCommand}"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" IsEnabled="{Binding IsEnabledNextButton}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
 
 
 
-                
+
 
             </Grid>
 
-
-            <Grid x:Name="ListOfItemsInDatabase" Grid.Row="0" Grid.Column="0">
+            <Grid x:Name="ListOfItemsInDatabase" Visibility="{Binding DbProductsVisibility}" Grid.Row="0" Grid.Column="0">
                 <Grid Margin="5">
-                    <DataGrid x:Name="DataGridItems" IsReadOnly="True" ItemsSource="{Binding DB_Items}"
+                    <DataGrid x:Name="DataGridItems" IsReadOnly="True" ItemsSource="{Binding DbProducts}"
                       AutoGenerateColumns="False" SelectionUnit="Cell" VerticalAlignment="Stretch"
-                              MouseDoubleClick="DataGridItems_MouseDoubleClick">
+                             >
+
+                        <DataGrid.InputBindings>
+                            <MouseBinding
+                                MouseAction="LeftDoubleClick"
+                                Command="{Binding DbProductClickCommand}" 
+                                CommandParameter="{Binding ElementName=DataGridItems, Path=CurrentItem}" />
+                        </DataGrid.InputBindings>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="100" Header="ID" Binding="{Binding Item_ID}">
+                            <DataGridTextColumn Width="100" Header="ID" Binding="{Binding Prd_ID}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -122,7 +194,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Width="150" Header="Product type" Binding="{Binding Item_type}">
+                            <DataGridTextColumn Width="150" Header="Ceneo ID" Binding="{Binding Prd_CeneoID}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -130,7 +202,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Product brand" Binding="{Binding Item_brand}">
+                            <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Prd_Type}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -141,7 +213,7 @@
 
 
 
-                            <DataGridTextColumn Width="*" Header="Product model" Binding="{Binding Item_model}">
+                            <DataGridTextColumn Width="*" Header="Brand" Binding="{Binding Prd_Brand}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -149,7 +221,15 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Additional comments" Binding="{Binding Additional_comments}">
+                            <DataGridTextColumn Width="*" Header="Model" Binding="{Binding Prd_Model}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Comments" Binding="{Binding Prd_Comments}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -171,38 +251,71 @@
                 </Grid>
             </Grid>
 
+            <Grid x:Name="TransformedData_Grid" Visibility="{Binding TransformedDataVisibility}" Grid.Column="0" Grid.Row="0">
+                <Grid Margin="5"  >
+                    <DataGrid AutoGenerateColumns="False" SelectionUnit="Cell"
+                        CanUserAddRows="False" Height="Auto" 
+                        x:Name="TransformedData_DataGrid" IsReadOnly="True"
+                        ItemsSource="{Binding DbReviews , IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
 
-            <Grid x:Name="DataProductAndReviews"  Visibility="Visible" Grid.Column="0"  Grid.Row="0">
-                <ScrollViewer 
-                    x:Name="SingleProduct"
-                    Background="LightGray"
-                    
-                    >
-                    <StackPanel x:Name="DataGridItem">
+                        
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsReviewInserted, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Background" Value="#8dfc8f" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
 
-
-
-                    </StackPanel>
-                    <!--<Label Content="Product_ID: " HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Label Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Content="Price: " HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Label Content="{Binding Product_ID}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Label Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="52"/>
-                <Label Content="{Binding Price}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Content="Rating: " HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Label Content="{Binding Rating}" HorizontalAlignment="Left" VerticalAlignment="Top"/> -->
-
-                </ScrollViewer>
-            </Grid>
-            
-            
-            <Grid x:Name="ReviewsForItemInDatabase"  Visibility="Collapsed" Grid.Column="0"  Grid.Row="0">
-                <Grid Margin="5">
-                    <DataGrid x:Name="DataGridReview" IsReadOnly="True" ItemsSource="{Binding DB_Reviews}"
-                      SelectionUnit="Cell" VerticalAlignment="Stretch">
-<!--
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="100" Header="ID" Binding="{Binding Item_ID}">
+                            <DataGridTextColumn Width="130" Header="Reviewer" Binding="{Binding Rev_Reviewer}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="100" Header="Defects" Binding="{Binding Rev_Defects}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.FontWeight" Value="Medium"/>
+                                        <Setter Property="TextBlock.Foreground" Value="#dd0000" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="100" Header="Advantages" Binding="{Binding Rev_Advantages}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+
+                                        <Setter Property="TextBlock.FontWeight" Value="Medium"/>
+                                        <Setter Property="TextBlock.Foreground" Value="#1a8400" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="100" Header="Ceneo ID" Binding="{Binding Rev_CeneoID}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+
+                                        <Setter Property="TextBlock.FontWeight" Value="Medium"/>
+                                        <Setter Property="TextBlock.Foreground" Value="#1a8400" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="*" Header="Review" Binding="{Binding Rev_Content}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -210,69 +323,226 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Width="150" Header="Product type" Binding="{Binding Item_type}">
+
+                            <DataGridTextColumn Width="140" Header="Date" Binding="{Binding Rev_Date}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Product brand" Binding="{Binding Item_brand}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="TextBlock.FontWeight" Value="Medium"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-
-
-                            <DataGridTextColumn Width="*" Header="Product model" Binding="{Binding Item_model}">
+                            <DataGridTextColumn Width="100" Header="Recommend" Binding="{Binding Rev_Recom}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Additional comments" Binding="{Binding Additional_comments}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+
+                                        <Setter Property="TextBlock.FontWeight" Value="Heavy"/>
                                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
+                            <DataGridTextColumn Width="45" Header="Rating" Binding="{Binding Rev_Rating}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
 
+                                        <Setter Property="TextBlock.FontWeight" Value="Heavy"/>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
 
+                            <DataGridTextColumn Width="45" Header="U" Binding="{Binding Rev_UpVotes}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.Foreground" Value="#1a8400" />
+
+                                        <Setter Property="TextBlock.FontWeight" Value="Heavy"/>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Width="45" Header="D" Binding="{Binding Rev_DownVotes}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.Foreground" Value="#dd0000" />
+
+                                        <Setter Property="TextBlock.FontWeight" Value="Heavy"/>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            
                         </DataGrid.Columns>
 
-                        <DataGrid.ContextMenu>
-                            <ContextMenu >
-                                <MenuItem Command="Copy" />
-                            </ContextMenu>
-                        </DataGrid.ContextMenu>  -->
                     </DataGrid>
+
                 </Grid>
-                
             </Grid>
-            
-            
-            <ScrollViewer Grid.Column="1" Grid.Row="0" x:Name="ScrollLog" ScrollChanged="SingleProduct_ScrollChanged">
+
+            <Grid x:Name="ProductWithReviews"  Visibility="{Binding ProductWithReviewsVisibility}" Grid.Column="0"  Grid.Row="0">
+                <ScrollViewer Background="LightGray">
+                    <StackPanel>
+                        <StackPanel x:Name="ProductWithReviewsPanel" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid x:Name="DbReviewsVisibility"  Visibility="{Binding DbReviewsVisibility}" Grid.Column="0"  Grid.Row="0">
+
+
+                <Grid Margin="5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Button x:Name="BackToDbProducts_Button" Content="Back" Command="{Binding BackToDbProductsCommand}"/>
+                        <Button x:Name="Export_Button" Content="Export to CSV" Command="{Binding ExportToCSVCommand}" />
+                    </StackPanel>
+
+                    <Grid  Grid.Row="1"  Margin="5">
+                        <Grid>
+                            <DataGrid x:Name="DataGridReview" IsReadOnly="True" ItemsSource="{Binding DbReviews}"
+                      SelectionUnit="Cell" VerticalAlignment="Stretch" AutoGenerateColumns="False" >
+
+
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu >
+                                        <MenuItem Header="Text editor" Click="MenuItem_Click"  />
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="70" Header="Review ID" Binding="{Binding Rev_ID}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="70" Header="Ceneo ID" Binding="{Binding Rev_CeneoID}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="70" Header="Product ID" Binding="{Binding Rev_PrdID}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="100" Header="Advantages" Binding="{Binding Rev_Advantages}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="100" Header="Defects" Binding="{Binding Rev_Defects}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="100" Header="Reviewer" Binding="{Binding Rev_Reviewer}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="100" Header="Summary" Binding="{Binding Rev_Summary}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="110" Header="Recom" Binding="{Binding Rev_Recom}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="40" Header="Up" Binding="{Binding Rev_UpVotes}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="40" Header="Down" Binding="{Binding Rev_DownVotes}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="*" Header="Content" Binding="{Binding Rev_Content}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="*" Header="Date" Binding="{Binding Rev_Date}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+
+
+            </Grid>
+
+
+            <ScrollViewer Margin="0, 5,5,5"  Grid.Column="1" Grid.Row="0" x:Name="ScrollLog" ScrollChanged="SingleProduct_ScrollChanged">
                 <TextBlock 
                 TextWrapping="Wrap"
                 x:Name="TextBlock_Log"
                 Background="Black"
                 Foreground="LightGray"
-                Text="Log: " />
+                Text="{Binding LogText, UpdateSourceTrigger=PropertyChanged}" />
             </ScrollViewer>
-            
-            
+
+
         </Grid>
-        
+
 
 
 
