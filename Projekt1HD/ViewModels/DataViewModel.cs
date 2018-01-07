@@ -1311,7 +1311,7 @@ namespace Projekt1HD.ViewModels
                             " @Val_Review " +
 
                         " WHERE NOT EXISTS(SELECT 1 FROM Reviews WHERE Rev_CeneoID = " + r.Rev_CeneoID +
-                        " ) ";
+                        " AND  Rev_PrdID = " + Product.Prd_CeneoID + " )";
 
                     command = new SQLiteCommand(sql, Connection());
                     command.Parameters.Add("@Val_Review", DbType.String).Value = r.Rev_Content;
