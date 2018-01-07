@@ -64,8 +64,7 @@
 
             <Grid x:Name="WelcomeView" Visibility="{Binding WelcomePageVisibility}" Grid.Row="0" Grid.Column="0">
                 <Grid Margin="5">
-                    <TextBlock VerticalAlignment="Center" FontSize="50" Text="Welcome in RevViewer application.\n
-                                     " />
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" Text="Welcome in RevViewer application."/>
                 </Grid>
             </Grid>
 
