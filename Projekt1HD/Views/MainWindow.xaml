@@ -29,7 +29,7 @@
                 <StackPanel x:Name="Search" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,5,0,5">
                     <CheckBox VerticalAlignment="Center" x:Name="SearchByID" Content="Search by ID"  IsChecked="{Binding IsSearchByIdChecked, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Margin="5,0,0,0" x:Name="TextBox_Search" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="32" Width="300"/>
-                    <Button Margin="5,0,0,0" Content="Search" Command="{Binding SearchCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"   Height="32" IsEnabled="{Binding LockedButtons}"/>
+                    <Button Margin="5,0,0,0" Content="Search" Command="{Binding SearchCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"   Height="32" IsEnabled="{Binding AreButtonsEnabled}"/>
                     <fa:ImageAwesome Margin="5,0,0,0" x:Name="LoadingSpinner"   Icon="Spinner" Spin="True" SpinDuration="4" Visibility="{Binding LoadingSpinnerVisibility}" Height="32" Width="32"/>
                     <TextBlock Margin="5,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding ProgressText}" Width="100"/>
                 </StackPanel>
@@ -45,8 +45,8 @@
 
                 <StackPanel x:Name="DbManagement" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                     <Button Content="Show database" Command="{Binding ShowDatabaseCommand}" Width="100" Margin="0,0,5,0" IsEnabled="{Binding AreButtonsEnabled}" />
-                    <Button Content="Clear database" Command="{Binding ClearDatabaseCommand}" Width="100" IsEnabled="{Binding LockedButtons}" Margin="0,0,5,0"/>
-                    <Button Content="Welcome page" Command="{Binding GoToWelcomePageCommand}" Width="100" IsEnabled="{Binding LockedButtons}"/>
+                    <Button Content="Clear database" Command="{Binding ClearDatabaseCommand}" Width="100" IsEnabled="{Binding AreButtonsEnabled}" Margin="0,0,5,0"/>
+                    <Button Content="Welcome page" Command="{Binding GoToWelcomePageCommand}" Width="100" IsEnabled="{Binding AreButtonsEnabled}"/>
                 </StackPanel>
 
             </DockPanel>
