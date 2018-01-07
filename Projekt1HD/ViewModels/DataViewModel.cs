@@ -34,24 +34,24 @@ namespace Projekt1HD.ViewModels
     public class DataViewModel : BindableBase, INotifyPropertyChanged
     {
 
-        private BindableStackPanel _prdPanel;
-        public BindableStackPanel PrdPanel
+        private BindableStackPanel _productPanel;
+        public BindableStackPanel ProductPanel
         {
-            get { return _prdPanel; }
-            set { SetProperty(ref _prdPanel, value); }
+            get { return _productPanel; }
+            set { SetProperty(ref _productPanel, value); }
         }
 
 
-        private ObservableCollection<Product> _productCollection = new ObservableCollection<Product>();
-        public ObservableCollection<Product> ProductCollection
+        private ObservableCollection<Product> _products = new ObservableCollection<Product>();
+        public ObservableCollection<Product> Products
         {
             get
             {
-                return _productCollection;
+                return _products;
             }
             set
             {
-                _productCollection = value;
+                _products = value;
                 RaisePropertyChanged();
             }
         }
@@ -284,11 +284,9 @@ namespace Projekt1HD.ViewModels
         }
 
 
-        PrdDetails PrdDetails;
+        Product Product;
 
-        List<Review> ReviewsList = new List<Review>();
-
-        public string ProductId { get; set; }
+        List<Review> Reviews = new List<Review>();
 
         private bool _isSearchByIdChecked;
         public bool IsSearchByIdChecked
@@ -334,10 +332,8 @@ namespace Projekt1HD.ViewModels
             }
         }
 
-        private Statistics statistics = new Statistics();
+        private Statistics Statistics = new Statistics();
 
-
-        public HtmlDocument htmlDoc = new HtmlDocument();
 
         public DataViewModel(StackPanel stackPanel)
         {
@@ -355,12 +351,11 @@ namespace Projekt1HD.ViewModels
             ClearDatabaseCommand = new RelayCommand(o => ClearDatabaseClick());
 
             DbProductClickCommand = new RelayCommand(o => DbProductClick(o));
-            GoToWelcomePageCommand = new RelayCommand(o => GoToWelcomePageClick());
+            GoToWelcomePageCommand = new RelayCommand(o => HideAllBut(Views.WelcomePage));
 
             BackToDbProductsCommand = new RelayCommand(o => HideAllBut(Views.DbProducts));
-            ExportToCSVCommand = new RelayCommand(o => ExportToCSV());
 
-            
+
             ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
             IsSearchByIdChecked = true;
             SearchString = "50851290";
@@ -370,244 +365,261 @@ namespace Projekt1HD.ViewModels
 
 
 
-            
+
             IsEAllowed = false;
             IsTAllowed = false;
             IsLAllowed = false;
 
-            _prdPanel = new BindableStackPanel();
-            PrdPanel.StkPanel = stackPanel;
+            _productPanel = new BindableStackPanel();
+            ProductPanel.StkPanel = stackPanel;
         }
 
-        public async void ETLClick()
+        private void HideAllBut(Views view)
         {
-            LoadingSpinnerVisibility = Visibility.Visible;
-            IsEAllowed = false;
-            IsTAllowed = false;
-            IsLAllowed = false;
+            //hide all grids
+            DbReviewsVisibility = Visibility.Collapsed;
+            DbProductsVisibility = Visibility.Collapsed;
+            ProductsVisibility = Visibility.Collapsed;
+            ProductWithReviewsVisibility = Visibility.Collapsed;
+            TransformedDataVisibility = Visibility.Collapsed;
+            WelcomePageVisibility = Visibility.Collapsed;
 
-            Task<bool> t = ExtractData();
-            bool xasd = await t;
-
-            await Task.Run(() => TransformData());
-
-            await Task.Run(() => LoadData());
-
-
-            LoadingSpinnerVisibility = Visibility.Hidden;
-            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
+            //show selected grid
+            switch (view)
+            {
+                case Views.Products:
+                    ProductsVisibility = Visibility.Visible;
+                    break;
+                case Views.ProductWithReviews:
+                    ProductWithReviewsVisibility = Visibility.Visible;
+                    break;
+                case Views.TranformedReviews:
+                    TransformedDataVisibility = Visibility.Visible;
+                    break;
+                case Views.DbProducts:
+                    DbProductsVisibility = Visibility.Visible;
+                    break;
+                case Views.DbReviews:
+                    DbReviewsVisibility = Visibility.Visible;
+                    break;
+                case Views.NoView:
+                    break;
+                case Views.WelcomePage:
+                    WelcomePageVisibility = Visibility.Visible;
+                    break;
+            }
         }
 
-        public async void ExtractClick()
+        public async Task<HtmlDocument> ConnectWithPageAsync(string _urlAddress)
         {
+            Log("Connecting to web page...");
 
-            LoadingSpinnerVisibility = Visibility.Visible;
-            IsEAllowed = false;
-
-            Task<bool> t = ExtractData();
-            bool xasd = await t;
-
-            IsTAllowed = true;
-            LoadingSpinnerVisibility = Visibility.Hidden;
-
-        }
-
-        public async void TransformClick()
-        {
-            LoadingSpinnerVisibility = Visibility.Visible;
-            IsTAllowed = false;
-
-            await Task.Run(() => TransformData());
-
-
-            IsLAllowed = true;
-            LoadingSpinnerVisibility = Visibility.Hidden;
-        }
-
-
-        public async void LoadClick()
-        {
-            LoadingSpinnerVisibility = Visibility.Visible;
-            IsLAllowed = false;
-
-            await Task.Run(() => LoadData());
-
-            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
-            LoadingSpinnerVisibility = Visibility.Hidden;
-        }
-
-
-        public async void DbProductClick(object o)
-        {
-            HideAllBut(Views.DbReviews);
-
-            var prd = o as DbProduct;
-            var id = prd.Prd_CeneoID;
-
-            _dbReviews.Clear();
-
-            Log("Connected to database...");
+            var htmlWeb = new HtmlWeb
+            {
+                OverrideEncoding = Encoding.UTF8
+            };
+            var htmlDoc = new HtmlDocument();
 
             await Task.Run(() =>
             {
-                GetReviewsForProduct(id);
+                try
+                {
+
+                    htmlDoc = htmlWeb.Load(_urlAddress);
+                    Log("Connected!");
+
+
+                }
+                catch (Exception aaa)
+                {
+                    MessageBox.Show("Error: Probably you don't have access to Internet.");
+
+                    Log("Failed..No Internet Connection.");
+
+                }
             });
 
-            Log("Done!");
-
-            ProgressText = "Done";
+            return htmlDoc;
         }
 
-
-
-        public void GetReviewsForProduct(int id)
+        public void Log(string l)
         {
+            LogText += "\n" + l;
+        }
+
+        private void SearchClick()
+        {
+            ProgressText = "";
+            LoadingSpinnerVisibility = Visibility.Visible;
+
+            if (IsSearchByIdChecked == true)
+            {
+                SearchProduct(SearchString);
+            }
+            else
+            {
+                SearchProducts();
+            }
+        }
+
+        public async void SearchProducts()
+        {
+            HideAllBut(Views.NoView);
+            var htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/;szukaj-" + SearchString);
+
             try
             {
 
-                string sql = "SELECT * FROM Reviews Where Rev_PrdID = " + id;
+                string _pageCountValue = htmlDoc.DocumentNode.SelectSingleNode("//input[@id='page-counter']").Attributes["data-pageCount"].Value;
 
-                SQLiteCommand command = new SQLiteCommand(sql, Connection());
+                PageCount = Convert.ToInt32(_pageCountValue);
 
-                SQLiteDataReader reader = command.ExecuteReader();
-                
-                Log("Connected \nReading stored reviews.");
-
-                int i = 0;
-
-                while (reader.Read())
+                if (PageCount > 1)
                 {
-                    i++;
-
-                    DbReview dbReview = new DbReview()
-                    {
-                        Rev_PrdID = Convert.ToInt32(reader["Rev_PrdID"].ToString()),
-                        Rev_ID = Convert.ToInt32(reader["Rev_ID"]),
-                        Rev_Advantages = reader["Rev_Advantages"].ToString(),
-                        Rev_Defects = reader["Rev_Defects"].ToString(),
-                        Rev_Summary = reader["Rev_Summary"].ToString(),
-                        Rev_Rating = reader["Rev_Rating"].ToString(),
-                        Rev_Reviewer = reader["Rev_Reviewer"].ToString(),
-                        Rev_Content = reader["Rev_Content"].ToString(),
-                        Rev_CeneoID = (reader["Rev_CeneoID"].ToString() != "") ? Convert.ToInt32(reader["Rev_CeneoID"]) : 0,
-                        Rev_Date = (reader["Rev_Date"].ToString() != "") ? (DateTime?)DateTime.Parse(reader["Rev_Date"].ToString()) : (DateTime?)null,
-                        Rev_Recom = (reader["Rev_Recom"].ToString() != "") ? reader["Rev_Recom"].ToString() : "",
-                        Rev_DownVotes = (reader["Rev_DownVotes"].ToString() != "") ? Convert.ToInt32(reader["Rev_DownVotes"]) : 0,
-                        Rev_UpVotes = (reader["Rev_UpVotes"].ToString() != "") ? Convert.ToInt32(reader["Rev_UpVotes"]) : 0
-                    };
-
-                   
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        ProgressText = "" + i;
-                        DbReviews.Add(dbReview);
-                    });
-                    Log("Loaded review: ID = " + Convert.ToInt32(reader["Rev_CeneoID"]));
-
+                    IsEnabledNextButton = true;
                 }
+                CurrentPage = "Page: 1";
+
             }
-            catch (Exception ea)
+            catch (Exception nex)
             {
-                MessageBox.Show(ea.ToString());
+                MessageBox.Show("There are no products for searched input.");
+                LoadingSpinnerVisibility = Visibility.Hidden;
+                return;
             }
 
+            GetProductsOnPage(htmlDoc);
+
+            LoadingSpinnerVisibility = Visibility.Hidden;
 
         }
 
-        public void ShowDatabaseClick()
+        public void GetProductsOnPage(HtmlDocument htmlDoc)
         {
-            HideAllBut(Views.DbProducts);
-            
-
-            _dbProducts.Clear();
-
             try
             {
+                Products.Clear();
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'cat-prod-row js_category-list-item js_man-track-event')]");
 
-                Log("Connected to database...");
-                string sql = "SELECT * FROM Products";
 
-                SQLiteCommand command = new SQLiteCommand(sql, Connection());
-
-                SQLiteDataReader reader = command.ExecuteReader();
-
-                Log("Reading stored products.");
-
-                while (reader.Read())
+                foreach (HtmlNode node in nodes)
                 {
-                    _dbProducts.Add(new DbProduct()
+
+                    HtmlNode aNode = node.SelectSingleNode("./a");
+
+                    var x = new HtmlDocument();
+                    x.LoadHtml(node.OuterHtml);
+
+                    if (Regex.IsMatch(x.DocumentNode.SelectSingleNode("//a[contains(@class, ' js_conv')]").Attributes["href"].Value.Remove(0, 1), @"^[0-9].*"))
                     {
-                        Prd_ID = Convert.ToInt32(reader["Prd_ID"]),
-                        Prd_CeneoID = Convert.ToInt32(reader["Prd_CeneoID"]),
-                        Prd_Brand = reader["Prd_Brand"].ToString(),
-                        Prd_Model = reader["Prd_Model"].ToString(),
-                        Prd_Type = reader["Prd_Type"].ToString(),
-                        Prd_Comments = reader["Prd_Comments"].ToString()
 
-                    });
+                        var c = Regex.Match(x.DocumentNode.SelectSingleNode("//a[contains(@class, 'product-reviews-link dotted-link js_reviews-link')]")?.ChildNodes[2]?.InnerText ?? "0", @"\d+").Value;
 
-                    Log("Loaded item: ID = " + reader["Prd_CeneoID"].ToString());
+                        Products.Add(new Product
+                        {
+                            Prd_Name = x.DocumentNode.SelectSingleNode("//a[contains(@class, ' js_conv')]").InnerText,
+                            Prd_CeneoID = x.DocumentNode.SelectSingleNode("//div[contains(@class,'cat-prod-row js_category-list-item js_man-track-event')]").Attributes["data-pid"].Value,
+                            Prd_ReviewsCount = c
+
+                        });
+                    }
                 }
+
+                HideAllBut(Views.Products);
             }
-            catch (Exception ea)
+            catch (Exception exc)
             {
-                Console.WriteLine(ea.ToString());
+                MessageBox.Show("Error " + exc.ToString());
             }
 
         }
 
-        public void ClearDatabaseClick()
+        private async void NextPageClick()
         {
+            HideAllBut(Views.NoView);
+            LoadingSpinnerVisibility = Visibility.Visible;
 
+            Int32.TryParse(Regex.Match(CurrentPage, @"\d+").Value, out int c);
+            string _pageNo = ";0020-30-0-0-" + c + ".htm";
+            CurrentPage = "Page: " + (c + 1);
+
+            var htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/;szukaj-" + SearchString + _pageNo);
+
+
+            GetProductsOnPage(htmlDoc);
+
+            if (c + 1 == PageCount)
+            {
+                IsEnabledNextButton = false;
+            }
+
+            LoadingSpinnerVisibility = Visibility.Hidden;
+        }
+
+        private async void PreviousPageClick()
+        {
+            LoadingSpinnerVisibility = Visibility.Visible;
+            HideAllBut(Views.NoView);
+
+            Int32.TryParse(Regex.Match(CurrentPage, @"\d+").Value, out int c);
+            string _pageNo = ";0020-30-0-0-" + (c - 2) + ".htm";
+            CurrentPage = "Page: " + (c - 1);
+
+            var htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/;szukaj-" + SearchString + _pageNo);
+
+            GetProductsOnPage(htmlDoc);
+
+            if (c - 1 < PageCount)
+            {
+                IsEnabledNextButton = true;
+            }
+
+            LoadingSpinnerVisibility = Visibility.Hidden;
+        }
+
+        private void ProductClick(object o)
+        {
+            var prd = o as Product;
+            SearchProduct(prd.Prd_CeneoID);
+        }
+
+        public SQLiteConnection Connection()
+        {
+            SQLiteConnection sQLiteConnection =
+                new SQLiteConnection("Data Source = ProjektHD.db; " +
+                "                     Version = 3; " +
+                "                     datetimeformat=CurrentCulture; ");
 
             try
             {
-                
-                string deleteReviewsQuery = "DELETE FROM Reviews";
-                string deleteProductsQuery = "DELETE FROM Products";
-
-                SQLiteCommand command = new SQLiteCommand(deleteProductsQuery, Connection());
-
-                int items_deleted = command.ExecuteNonQuery();
-
-                Log("Deleted " + items_deleted + " products.");
-
-                SQLiteCommand command2 = new SQLiteCommand(deleteReviewsQuery, Connection());
-
-                int reviews_deleted = command2.ExecuteNonQuery();
-
-                Log("Deleted " + reviews_deleted + " reviews.");
-
-
-
-
+                sQLiteConnection.Open();
             }
-            catch (Exception exa)
+            catch (Exception e)
             {
-                Console.WriteLine(exa.ToString());
+                MessageBox.Show("There is a problem with connection. \n" + e.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            return sQLiteConnection;
         }
 
         public async void SearchProduct(string prdId)
         {
             ProgressText = "";
             LoadingSpinnerVisibility = Visibility.Visible;
-            ProductCollection.Clear();
 
             HideAllBut(Views.ProductWithReviews);
 
-            Task<HtmlDocument> longRunningTask = ConnectWithPageAsync("https://www.ceneo.pl/" + prdId + "#tab=reviews");
-            htmlDoc = await longRunningTask;
+            HtmlDocument HtmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/" + prdId + "#tab=reviews");
+
 
 
             string _pageType = "";
 
-            //szuka nawet jak id jest przed to usówa string
             try
             {
-                _pageType = htmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:type')]").Attributes["content"].Value;
+                _pageType = HtmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:type')]").Attributes["content"].Value;
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 LoadingSpinnerVisibility = Visibility.Hidden;
                 HideAllBut(Views.WelcomePage);
@@ -623,22 +635,22 @@ namespace Projekt1HD.ViewModels
             }
             else if (_pageType == "product")
             {
-                PrdPanel.StkPanel.Children.Clear();
+                ProductPanel.StkPanel.Children.Clear();
 
-                PrdDetails = new PrdDetails
+                Product = new Product
                 {
                     Prd_CeneoID = prdId,
-                    Prd_LowerPrice = htmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:price:amount')]")?.Attributes["content"].Value
-                                    + " " + htmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:price:currency')]")?.Attributes["content"].Value,
-                    Prd_Name = htmlDoc.DocumentNode.SelectSingleNode("//h1[contains(@class,'product-name js_product-h1-link')]")?.InnerHtml,
-                    Prd_Rating = htmlDoc.DocumentNode.SelectSingleNode("//input[contains(@name,'rating')]").Attributes["value"].Value + "/5",
-                    Prd_VotesCount = htmlDoc.DocumentNode.SelectSingleNode("//span[contains(@class,'product-reviews-link__votes-count')]")?.InnerHtml.Split(' ')[0] ?? "0",
-                    Prd_ReviewsCount = htmlDoc.DocumentNode.SelectSingleNode("//span[contains(@itemprop,'reviewCount')]")?.InnerHtml ?? "0",
-                    Prd_Type = htmlDoc.DocumentNode.SelectSingleNode("//nav[contains(@class,'breadcrumbs')]/dl/dd")?.SelectNodes("span")?.Last().SelectSingleNode(".//span[@itemprop='title']")?.InnerHtml ?? "null",
-                    Prd_Brand = htmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:brand')]")?.Attributes["content"].Value ?? ""
+                    Prd_LowerPrice = HtmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:price:amount')]")?.Attributes["content"].Value
+                                    + " " + HtmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:price:currency')]")?.Attributes["content"].Value,
+                    Prd_Name = HtmlDoc.DocumentNode.SelectSingleNode("//h1[contains(@class,'product-name js_product-h1-link')]")?.InnerHtml,
+                    Prd_Rating = HtmlDoc.DocumentNode.SelectSingleNode("//input[contains(@name,'rating')]").Attributes["value"].Value + "/5",
+                    Prd_VotesCount = HtmlDoc.DocumentNode.SelectSingleNode("//span[contains(@class,'product-reviews-link__votes-count')]")?.InnerHtml.Split(' ')[0] ?? "0",
+                    Prd_ReviewsCount = HtmlDoc.DocumentNode.SelectSingleNode("//span[contains(@itemprop,'reviewCount')]")?.InnerHtml ?? "0",
+                    Prd_Type = HtmlDoc.DocumentNode.SelectSingleNode("//nav[contains(@class,'breadcrumbs')]/dl/dd")?.SelectNodes("span")?.Last().SelectSingleNode(".//span[@itemprop='title']")?.InnerHtml ?? "null",
+                    Prd_Brand = HtmlDoc.DocumentNode.SelectSingleNode("//meta[contains(@property,'og:brand')]")?.Attributes["content"].Value ?? ""
                 };
 
-                Log("Product found! It is: " + PrdDetails.Prd_Name);
+                Log("Product found! It is: " + Product.Prd_Name);
 
                 StackPanel stp = new StackPanel();
 
@@ -659,183 +671,57 @@ namespace Projekt1HD.ViewModels
                 text.Inlines.Add(new Run
                 {
                     FontSize = 20,
-                    Text = "Product ID: " + PrdDetails.Prd_CeneoID + "\n"
-                           + "Name: " + PrdDetails.Prd_Name + "\n"
-                           + "Lower Price: " + PrdDetails.Prd_LowerPrice + "\n"
-                           + "Brand: " + PrdDetails.Prd_Brand + "\n"
-                           + "Rating: " + PrdDetails.Prd_Rating + "\n"
-                           + "Votes Count: " + PrdDetails.Prd_VotesCount + "\n"
-                           + "Category: " + PrdDetails.Prd_Type + "\n"
-                           + "Reviews Count: " + PrdDetails.Prd_ReviewsCount
+                    Text = "Product ID: " + Product.Prd_CeneoID + "\n"
+                           + "Name: " + Product.Prd_Name + "\n"
+                           + "Lower Price: " + Product.Prd_LowerPrice + "\n"
+                           + "Brand: " + Product.Prd_Brand + "\n"
+                           + "Rating: " + Product.Prd_Rating + "\n"
+                           + "Votes Count: " + Product.Prd_VotesCount + "\n"
+                           + "Category: " + Product.Prd_Type + "\n"
+                           + "Reviews Count: " + Product.Prd_ReviewsCount
                 });
 
                 stp.Children.Add(text);
-                PrdPanel.StkPanel.Children.Add(stp);
+                ProductPanel.StkPanel.Children.Add(stp);
 
                 LoadingSpinnerVisibility = Visibility.Hidden;
 
-                if (Convert.ToInt32(PrdDetails.Prd_ReviewsCount) == 0)
+                if (Convert.ToInt32(Product.Prd_ReviewsCount) == 0)
                 {
-                    MessageBox.Show("There are no reviews for this product.");                    
+                    MessageBox.Show("There are no reviews for this product.");
                     return;
                 }
 
                 IsEAllowed = true;
                 ProcessButtonsPanelBorderBrushColor = Brushes.LightGreen;
 
-                
+
             }
 
         }
 
-
-        private void ProductClick(object o)
+        public string TransformString(string s)
         {
-            var prd = o as Product;
-            SearchProduct(prd.ProductID);
+            // delete all points
+            s = s.Replace(@",", "");
+            s = s.Replace(@"<br>", "");
+            s = s.Replace(@"&#243;", "ó");
+            s = Regex.Replace(s, @"\s+", " ");
+
+            return s;
         }
-
-        private async void NextPageClick()
-        {
-            HideAllBut(Views.NoView);
-            LoadingSpinnerVisibility = Visibility.Visible;
-
-            Int32.TryParse(Regex.Match(CurrentPage, @"\d+").Value, out int c);
-            string _pageNo = ";0020-30-0-0-" + c + ".htm";
-            CurrentPage = "Page: " + (c + 1);
-            
-            var htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/;szukaj-" + SearchString + _pageNo);
-
-
-            GetProductsOnPage(htmlDoc);
-
-            if (c + 1 == PageCount)
-            {
-                IsEnabledNextButton = false;
-            }
-
-            LoadingSpinnerVisibility = Visibility.Hidden;
-            HideAllBut(Views.Products);
-        }
-
-        private async void PreviousPageClick()
-        {
-            LoadingSpinnerVisibility = Visibility.Visible;
-            HideAllBut(Views.NoView);
-
-            Int32.TryParse(Regex.Match(CurrentPage, @"\d+").Value, out int c);
-            string _pageNo = ";0020-30-0-0-" + (c - 2) + ".htm";
-            CurrentPage = "Page: " + (c - 1);
-
-
-            var htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/;szukaj-" + SearchString + _pageNo);
-
-            GetProductsOnPage(htmlDoc);
-
-
-
-            if (c-1 < PageCount)
-            {
-                IsEnabledNextButton = true;
-            }
-
-            LoadingSpinnerVisibility = Visibility.Hidden;
-            HideAllBut(Views.Products);
-        }
-
-        private void SearchClick()
-        {
-            ProgressText = "";
-            LoadingSpinnerVisibility = Visibility.Visible;
-            ProductCollection.Clear();
-            LockETLProcess();
-
-
-            Log("Starting E process");
-
-            if (IsSearchByIdChecked == true)
-            {
-                SearchProduct(SearchString);
-            }
-            else
-            {
-                SearchProducts("https://www.ceneo.pl/;szukaj-" + SearchString);
-            }
-        }
-
-        public void LockETLProcess()
-        {
-            IsEAllowed = false;
-            IsTAllowed = false;
-            IsLAllowed = false;
-
-            ReviewsList.Clear();
-            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
-            DbReviews.Clear();
-            PrdPanel.StkPanel.Children.Clear();
-            
-        }
-
-        public void Log(string l)
-        {
-            _logText += "\n" + l;
-            RaisePropertyChanged(nameof(LogText));
-        }
-
-
-        public async Task<HtmlDocument> ConnectWithPageAsync(string _url_address)
-        {
-            Log("Connecting to web page...");
-
-            var htmlWeb = new HtmlWeb();
-            var tcs = new TaskCompletionSource<HttpWebResponse>();
-            htmlWeb.OverrideEncoding = Encoding.UTF8;
-            var htmlDoc = new HtmlDocument();
-
-            await Task.Run(() =>
-            {
-                try
-                {
-
-                    htmlDoc = htmlWeb.Load(_url_address);
-                    Log("Connected!");
-
-
-                }
-                catch (Exception aaa)
-                {
-                    MessageBox.Show("Error: Probably you don't have access to Internet.");
-
-                    Log("Failed..No Internet Connection.");
-
-                }
-            });
-
-            return htmlDoc;
-        }
-
-
 
         public async Task<bool> ExtractData()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             try
             {
-
-
-                ReviewsList.Clear();
+                Reviews.Clear();
                 Log("Looking for reviews.. ");
 
+                HtmlDocument htmlDoc = await ConnectWithPageAsync("https://www.ceneo.pl/" + Product.Prd_CeneoID + "#tab=reviews");
 
-                Task<HtmlDocument> longRunningTask = ConnectWithPageAsync("https://www.ceneo.pl/" + PrdDetails.Prd_CeneoID + "#tab=reviews");
-                var htmlDoc = await longRunningTask;
-
-                var ReviewCount = htmlDoc.DocumentNode.SelectSingleNode("//span[contains(@itemprop,'reviewCount')]").InnerHtml;  //<span itemprop="reviewCount">124</span>
-
-
-
-
-                Int32.TryParse(PrdDetails.Prd_ReviewsCount, out int rc);
+                Int32.TryParse(Product.Prd_ReviewsCount, out int rc);
 
                 if (rc % 10 != 0)
                 {
@@ -844,12 +730,12 @@ namespace Projekt1HD.ViewModels
 
                 var pages = rc / 10;
 
-                Log("Found total " + PrdDetails.Prd_ReviewsCount + " reviews on " + pages + " pages");
+                Log("Found total " + Product.Prd_ReviewsCount + " reviews on " + pages + " pages");
 
 
                 var review_no = 0;
 
-                int xdd = 0;
+                int no = 0;
 
                 for (var i = 1; i <= pages; i++)
                 {
@@ -866,9 +752,8 @@ namespace Projekt1HD.ViewModels
                     else
                     {
 
-                        // var x = ProductId + "/opinie-" + i;
 
-                        var c = await ConnectWithPageAsync("https://www.ceneo.pl/" + PrdDetails.Prd_CeneoID + "/opinie-" + i);
+                        var c = await ConnectWithPageAsync("https://www.ceneo.pl/" + Product.Prd_CeneoID + "/opinie-" + i);
 
                         doc = c;
 
@@ -1026,10 +911,10 @@ namespace Projekt1HD.ViewModels
 
 
 
-                        xdd++;
+                        no++;
 
-                        ReviewsList.Add(review);
-                        ShowReview(review, xdd);
+                        Reviews.Add(review);
+                        ShowReview(review, no);
 
 
 
@@ -1041,8 +926,6 @@ namespace Projekt1HD.ViewModels
 
 
                 LoadingSpinnerVisibility = Visibility.Hidden;
-
-                PrdDetails.Prd_Reviews = ReviewsList;
 
                 HasStageESucced = true;
 
@@ -1056,7 +939,6 @@ namespace Projekt1HD.ViewModels
             catch (Exception e)
             {
                 LoadingSpinnerVisibility = Visibility.Hidden;
-
                 Console.WriteLine(e);
             }
 
@@ -1066,184 +948,14 @@ namespace Projekt1HD.ViewModels
             var elapsedMs = watch.ElapsedMilliseconds;
 
 
-            statistics.ETime = elapsedMs;
-            statistics.ECount = ReviewsList.Count;
+            Statistics.ETime = elapsedMs;
+            Statistics.ECount = Reviews.Count;
 
             return true;
 
         }
-
-
-        public  void TransformData()
-        {
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                DbReviews.Clear();
-            });
-            HideAllBut(Views.TranformedReviews);
-
-            ProgressText = "";
-
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-
-            DbReview dbReview = new DbReview() { };
-            int i = 0;
-
-            ProgressText = i + "/" + ReviewsList.Count;
-
-            try
-            {
-
-                foreach (Review x in ReviewsList)
-                {
-                    i++;
-
-
-
-                    dbReview = new DbReview()
-                    {
-                        Rev_Recom = x.Product_Recommended,
-                        Rev_Advantages = (x.Advantages.Count != 0) ? TransformString(String.Join("/", x.Advantages.ToArray())) : "",
-                        Rev_Defects = (x.Defects.Count != 0) ? TransformString(String.Join("/", x.Defects.ToArray())) : "",
-                        Rev_Content = TransformString(x.Review_Text),
-                        Rev_Rating = x.Rating.Replace(@",", "."),
-                        Rev_Reviewer = TransformString(x.Reviewer),
-                        Rev_CeneoID = Convert.ToInt32(x.Review_ID),
-                        Rev_Date = DateTime.Parse(x.Date),
-                        Rev_PrdID = Convert.ToInt32(PrdDetails.Prd_CeneoID),
-                        Rev_UpVotes = (x.Votes_Yes != "") ? Convert.ToInt32(x.Votes_Yes) : 0,
-                        Rev_DownVotes = (x.Votes_No != "") ? Convert.ToInt32(x.Votes_No) : 0
-
-                    };
-
-
-                    
-                    ProgressText = i + "/" + ReviewsList.Count;
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        DbReviews.Add(dbReview);
-                    });
-                    Log("Tranformed rev with id " + dbReview.Rev_CeneoID);
-                }
-
-
-            }
-            catch (Exception e)
-            {
-
-            }
-
-
-
-            ProgressText = "Done";
-
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-
-
-            statistics.TTime = elapsedMs;
-            statistics.TCount = DbReviews.Count;
-
-        }
-
-
         
-
-
-        public async void SearchProducts(string _urlAddress)
-        {
-            HideAllBut(Views.NoView);
-            IsEnabledNextButton = true;
-
-            var htmlDoc = await ConnectWithPageAsync(_urlAddress);
-
-
-            try
-            {
-
-                string _pageCountValue = htmlDoc.DocumentNode.SelectSingleNode("//input[@id='page-counter']").Attributes["data-pageCount"].Value;
-
-                PageCount = 1;
-                CurrentPage = "Page: 1";
-
-            }
-            catch (Exception nex)
-            {
-                MessageBox.Show("There are no products for searched input.");
-                LoadingSpinnerVisibility = Visibility.Hidden;
-                return;
-            }
-
-            GetProductsOnPage(htmlDoc);
-
-            LoadingSpinnerVisibility = Visibility.Hidden;
-
-        }
-
-        public void GetProductsOnPage(HtmlDocument htmlDoc)
-        {
-            try
-            {
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'cat-prod-row js_category-list-item js_man-track-event')]");
-
-
-
-                ProductCollection.Clear();
-
-                foreach (HtmlNode node in nodes)
-                {
-
-                    HtmlNode aNode = node.SelectSingleNode("./a");
-
-                    var x = new HtmlDocument();
-                    x.LoadHtml(node.OuterHtml);
-
-                    if (Regex.IsMatch(x.DocumentNode.SelectSingleNode("//a[contains(@class, ' js_conv')]").Attributes["href"].Value.Remove(0, 1), @"^[0-9].*"))
-                    {
-
-                        var c = Regex.Match(x.DocumentNode.SelectSingleNode("//a[contains(@class, 'product-reviews-link dotted-link js_reviews-link')]")?.ChildNodes[2]?.InnerText ?? "0", @"\d+").Value; 
-
-                        ProductCollection.Add(new Product
-                        {
-                            Name = x.DocumentNode.SelectSingleNode("//a[contains(@class, ' js_conv')]").InnerText,
-                            Url = new Uri("https://www.ceneo.pl/" + x.DocumentNode.SelectSingleNode("//a[contains(@class, ' js_conv')]").Attributes["href"].Value.Remove(0, 1)),
-                            ProductID = x.DocumentNode.SelectSingleNode("//div[contains(@class,'cat-prod-row js_category-list-item js_man-track-event')]").Attributes["data-pid"].Value,
-                            ReviewsCount = c
-
-                        });
-                    }
-                }
-
-                HideAllBut(Views.Products);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Error " + exc.ToString());
-            }
-
-        }
-
-        public SQLiteConnection Connection()
-        {
-            SQLiteConnection sQLiteConnection =
-                new SQLiteConnection("Data Source = ProjektHD.db; " +
-                "                     Version = 3; " +
-                "                     datetimeformat=CurrentCulture; ");
-
-            try
-            {
-                sQLiteConnection.Open();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("There is a problem with connection. \n" + e.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            return sQLiteConnection;
-        }
-
-        public void ShowReview(Review r, int xdd)
+        public void ShowReview(Review r, int no)
         {
             //  HideAllBut(Views.Products);
 
@@ -1267,7 +979,7 @@ namespace Projekt1HD.ViewModels
 
             r.Reviewer = Regex.Replace(r.Reviewer, @"\s+", " ");
 
-            Reviewer.Text = "no: " + xdd + " Reviewer: " + r.Reviewer + "\n"
+            Reviewer.Text = "No: " + no + " \nReviewer: " + r.Reviewer + "\n"
                             + "Data: " + r.Date.ToString() + "\n"
                             + "Rating: " + r.Rating + "\n"
                             + r.Product_Recommended + "\n"
@@ -1301,7 +1013,7 @@ namespace Projekt1HD.ViewModels
                     Width = 150,
                     ItemsSource = r.Defects.Select(x => new { Defects = x }).ToList()
                 };
-                
+
                 LVd.IsReadOnly = true;
 
                 sp.Children.Add(LVd);
@@ -1363,7 +1075,79 @@ namespace Projekt1HD.ViewModels
                 sp.Children.Add(sp_com);
             }
 
-            PrdPanel.StkPanel.Children.Add(sp);
+            ProductPanel.StkPanel.Children.Add(sp);
+        }
+
+        public void TransformData()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                DbReviews.Clear();
+            });
+
+            HideAllBut(Views.TranformedReviews);
+
+            ProgressText = "";
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            DbReview dbReview = new DbReview() { };
+            int i = 0;
+
+            ProgressText = i + "/" + Reviews.Count;
+
+            try
+            {
+
+                foreach (Review x in Reviews)
+                {
+                    i++;
+
+
+
+                    dbReview = new DbReview()
+                    {
+                        Rev_Recom = x.Product_Recommended,
+                        Rev_Advantages = (x.Advantages.Count != 0) ? TransformString(String.Join("/", x.Advantages.ToArray())) : "",
+                        Rev_Defects = (x.Defects.Count != 0) ? TransformString(String.Join("/", x.Defects.ToArray())) : "",
+                        Rev_Content = TransformString(x.Review_Text),
+                        Rev_Rating = x.Rating.Replace(@",", "."),
+                        Rev_Reviewer = TransformString(x.Reviewer),
+                        Rev_CeneoID = Convert.ToInt32(x.Review_ID),
+                        Rev_Date = DateTime.Parse(x.Date),
+                        Rev_PrdID = Convert.ToInt32(Product.Prd_CeneoID),
+                        Rev_UpVotes = (x.Votes_Yes != "") ? Convert.ToInt32(x.Votes_Yes) : 0,
+                        Rev_DownVotes = (x.Votes_No != "") ? Convert.ToInt32(x.Votes_No) : 0
+
+                    };
+
+
+
+                    ProgressText = i + "/" + Reviews.Count;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        DbReviews.Add(dbReview);
+                    });
+                    Log("Tranformed rev with id " + dbReview.Rev_CeneoID);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+            }
+
+
+
+            ProgressText = "Done";
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+
+
+            Statistics.TTime = elapsedMs;
+            Statistics.TCount = DbReviews.Count;
+
         }
 
         private void LoadData()
@@ -1416,7 +1200,10 @@ namespace Projekt1HD.ViewModels
             //           }).ToList();
 
 
-            
+
+
+            int i = 0;
+            int j = 0;
 
             try
             {
@@ -1432,14 +1219,14 @@ namespace Projekt1HD.ViewModels
                     "Prd_Comments) " +
 
                         "SELECT " +
-                            "'" + PrdDetails.Prd_CeneoID + "', " +
-                            "'" + PrdDetails.Prd_Type + "', " +
-                            "'" + PrdDetails.Prd_Brand + "', " +
-                            "'" + PrdDetails.Prd_Name + "', " +
-                            "'" + PrdDetails.Prd_Name + "'" +
+                            "'" + Product.Prd_CeneoID + "', " +
+                            "'" + Product.Prd_Type + "', " +
+                            "'" + Product.Prd_Brand + "', " +
+                            "'" + Product.Prd_Name + "', " +
+                            "'" + Product.Prd_Name + "'" +
 
 
-                     "WHERE NOT EXISTS(SELECT 1 FROM Products WHERE Prd_CeneoID = " + PrdDetails.Prd_CeneoID + ") ";
+                     "WHERE NOT EXISTS(SELECT 1 FROM Products WHERE Prd_CeneoID = " + Product.Prd_CeneoID + ") ";
 
 
                 SQLiteCommand command = new SQLiteCommand(sql_item, Connection());
@@ -1448,7 +1235,7 @@ namespace Projekt1HD.ViewModels
 
                 if (rows > 0)
                 {
-                    Log("Added new product to database: ID = " + PrdDetails.Prd_CeneoID);
+                    Log("Added new product to database: ID = " + Product.Prd_CeneoID);
                 }
                 else
                 {
@@ -1459,28 +1246,21 @@ namespace Projekt1HD.ViewModels
 
                 ProgressText = "Done";
 
-            }
-            catch (Exception exa)
-            {
-                Console.WriteLine(exa.ToString());
-            }
 
 
-            int i = 0;
-            int j = 0;
 
-            ProgressText = 1 + "/" + DbReviews.Count;
 
-            var tmpCol = new List<DbReview>(DbReviews);
+                ProgressText = 1 + "/" + DbReviews.Count;
 
-            foreach (DbReview r in tmpCol)
-            {
-                j++;
+                var tmpCol = new List<DbReview>(DbReviews);
 
-                ProgressText = j + "/" + DbReviews.Count;
-
-                try
+                foreach (DbReview r in tmpCol)
                 {
+                    j++;
+
+                    ProgressText = j + "/" + DbReviews.Count;
+
+
                     string sql =
 
                         "INSERT INTO Reviews( " +
@@ -1499,11 +1279,11 @@ namespace Projekt1HD.ViewModels
 
                         "SELECT " +
                             r.Rev_CeneoID + ", " +
-                            PrdDetails.Prd_CeneoID + ", " +
+                            Product.Prd_CeneoID + ", " +
                             "'" + r.Rev_Advantages + "', " +
                             "'" + r.Rev_Defects + "', " +
                             "'" + r.Rev_Summary + "', " +
-                            "'" + r.Rev_Rating + "', " +    
+                            "'" + r.Rev_Rating + "', " +
                             "'" + r.Rev_Reviewer + "', " +
                             "'" + r.Rev_Date + "', " +
                             "'" + r.Rev_Recom + "', " +
@@ -1514,10 +1294,10 @@ namespace Projekt1HD.ViewModels
                         " WHERE NOT EXISTS(SELECT 1 FROM Reviews WHERE Rev_CeneoID = " + r.Rev_CeneoID +
                         " ) ";
 
-                    SQLiteCommand command = new SQLiteCommand(sql, Connection());
+                    command = new SQLiteCommand(sql, Connection());
                     command.Parameters.Add("@Val_Review", DbType.String).Value = r.Rev_Content;
 
-                    int rows = command.ExecuteNonQuery();
+                    rows = command.ExecuteNonQuery();
 
 
                     if (rows != 0)
@@ -1526,143 +1306,268 @@ namespace Projekt1HD.ViewModels
                         r.IsReviewInserted = true;
                         Log("Review " + r.Rev_CeneoID + " INSERTED");
                         i++;
-                    } else
+                    }
+                    else
                     {
                         Log("Review " + r.Rev_CeneoID + " is already in database.");
                     }
-
-                    
-
                 }
-                catch (Exception exa)
+
+
+                ProgressText = "Done";
+
+                if (i == 0)
                 {
-                    Console.WriteLine(exa.ToString());
-                }           
-                
-            }
+                    Log("All Reviews are arleady in Database.");
+                    Statistics.LCount = 0;
+                }
+                else
+                {
 
-            ProgressText = "Done";
+                    Log("Inserted " + (i) + " new reviews");
+
+                    Statistics.LCount = i;
+                }
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var dg = (DataGrid)Application.Current.MainWindow.FindName("TransformedData_DataGrid");
+                    dg.Items.Refresh();
+                });
+            }
+            catch (Exception exa)
+            {
+                MessageBox.Show("There is a problem with database." + exa.ToString());
+                Console.WriteLine(exa.ToString());
+            }
             
-            if (i == 0)
-            {
-                Log("All Reviews are arleady in Database.");
-                statistics.LCount = 0;
-            }
-            else
-            {                
-
-                Log("Inserted " + (i) + " new reviews");
-
-                statistics.LCount = i;
-            }
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var xaxa = (DataGrid)Application.Current.MainWindow.FindName("TransformedData_DataGrid");
-                xaxa.Items.Refresh();
-            });
+            
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
 
 
-            statistics.LTime = elapsedMs;
+            Statistics.LTime = elapsedMs;
 
             MessageBox.Show(
-                "Extract time: " + TimeSpan.FromMilliseconds(statistics.ETime) + "\n" +
-                "Transform time: " + TimeSpan.FromMilliseconds(statistics.TTime) + "\n" +
-                "Load time: " + TimeSpan.FromMilliseconds(statistics.LTime) + "\n" +
-                "Extracted items count: " + statistics.ECount + "\n" +
-                "Transformed items count: " + statistics.TCount + "\n" +
-                "Loaded items count: " + statistics.LCount,
+                "Extract time: " + TimeSpan.FromMilliseconds(Statistics.ETime) + "\n" +
+                "Transform time: " + TimeSpan.FromMilliseconds(Statistics.TTime) + "\n" +
+                "Load time: " + TimeSpan.FromMilliseconds(Statistics.LTime) + "\n" +
+                "Extracted items count: " + Statistics.ECount + "\n" +
+                "Transformed items count: " + Statistics.TCount + "\n" +
+                "Loaded items count: " + Statistics.LCount,
                 "Statistisc"
                 );
         }
 
-
-
-        public string TransformString(string s)
+        public async void ETLClick()
         {
-            // delete all points
-            s = s.Replace(@",", "");
-            s = s.Replace(@"<br>", "");
-            s = s.Replace(@"&#243;", "ó");
-            s = Regex.Replace(s, @"\s+", " ");
+            LoadingSpinnerVisibility = Visibility.Visible;
+            IsEAllowed = false;
+            IsTAllowed = false;
+            IsLAllowed = false;
 
-            return s;
+            Task<bool> t = ExtractData();
+            bool b = await t;
+
+            await Task.Run(() => TransformData());
+
+            await Task.Run(() => LoadData());
+
+
+            LoadingSpinnerVisibility = Visibility.Hidden;
+            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
+        }
+
+        public async void ExtractClick()
+        {
+
+            LoadingSpinnerVisibility = Visibility.Visible;
+            IsEAllowed = false;
+
+            Task<bool> t = ExtractData();
+            bool xasd = await t;
+
+            IsTAllowed = true;
+            LoadingSpinnerVisibility = Visibility.Hidden;
+
+        }
+
+        public async void TransformClick()
+        {
+            LoadingSpinnerVisibility = Visibility.Visible;
+            IsTAllowed = false;
+
+            await Task.Run(() => TransformData());
+
+
+            IsLAllowed = true;
+            LoadingSpinnerVisibility = Visibility.Hidden;
+        }
+
+        public async void LoadClick()
+        {
+            LoadingSpinnerVisibility = Visibility.Visible;
+            IsLAllowed = false;
+
+            await Task.Run(() => LoadData());
+
+            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
+            LoadingSpinnerVisibility = Visibility.Hidden;
+        }
+
+        public void ClearDatabaseClick()
+        {
+
+
+            try
+            {
+
+                string deleteReviewsQuery = "DELETE FROM Reviews";
+                string deleteProductsQuery = "DELETE FROM Products";
+
+                SQLiteCommand command = new SQLiteCommand(deleteProductsQuery, Connection());
+
+                int items_deleted = command.ExecuteNonQuery();
+
+                Log("Deleted " + items_deleted + " products.");
+
+                SQLiteCommand command2 = new SQLiteCommand(deleteReviewsQuery, Connection());
+
+                int reviews_deleted = command2.ExecuteNonQuery();
+
+                Log("Deleted " + reviews_deleted + " reviews.");
+
+
+
+
+            }
+            catch (Exception exa)
+            {
+                Console.WriteLine(exa.ToString());
+            }
+        }
+
+        public async void DbProductClick(object o)
+        {
+            HideAllBut(Views.DbReviews);
+
+            var prd = o as DbProduct;
+            var id = prd.Prd_CeneoID;
+
+            _dbReviews.Clear();
+
+            Log("Connected to database...");
+
+            await Task.Run(() =>
+            {
+                GetReviewsForProduct(id);
+            });
+
+            Log("Done!");
+
+            ProgressText = "Done";
         }
         
-
-
-
-        private void HideAllBut(Views view)
+        public void ShowDatabaseClick()
         {
-            //hide all grids
-            DbReviewsVisibility = Visibility.Collapsed;
-            DbProductsVisibility = Visibility.Collapsed;
-            ProductsVisibility = Visibility.Collapsed;
-            ProductWithReviewsVisibility = Visibility.Collapsed;
-            TransformedDataVisibility = Visibility.Collapsed;
-            WelcomePageVisibility = Visibility.Collapsed;
+            HideAllBut(Views.DbProducts);
 
-            //show selected grid
-            switch (view)
+
+            _dbProducts.Clear();
+
+            try
             {
-                case Views.Products:
-                    ProductsVisibility = Visibility.Visible;
-                    break;
-                case Views.ProductWithReviews:
-                    ProductWithReviewsVisibility = Visibility.Visible;
-                    break;
-                case Views.TranformedReviews:
-                    TransformedDataVisibility = Visibility.Visible;
-                    break;
-                case Views.DbProducts:
-                    DbProductsVisibility = Visibility.Visible;
-                    break;
-                case Views.DbReviews:
-                    DbReviewsVisibility = Visibility.Visible;
-                    break;
-                case Views.NoView:
-                    break;
-                case Views.WelcomePage:
-                    WelcomePageVisibility = Visibility.Visible;
-                    break;
+
+                Log("Connected to database...");
+                string sql = "SELECT * FROM Products";
+
+                SQLiteCommand command = new SQLiteCommand(sql, Connection());
+
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                Log("Reading stored products.");
+
+                while (reader.Read())
+                {
+                    _dbProducts.Add(new DbProduct()
+                    {
+                        Prd_ID = Convert.ToInt32(reader["Prd_ID"]),
+                        Prd_CeneoID = Convert.ToInt32(reader["Prd_CeneoID"]),
+                        Prd_Brand = reader["Prd_Brand"].ToString(),
+                        Prd_Model = reader["Prd_Model"].ToString(),
+                        Prd_Type = reader["Prd_Type"].ToString(),
+                        Prd_Comments = reader["Prd_Comments"].ToString()
+
+                    });
+
+                    Log("Loaded item: ID = " + reader["Prd_CeneoID"].ToString());
+                }
             }
-        }
-
-
-        public void ExportToCSV()
-        {
-            var _app = new Excel.Application();
-            var workbooks = _app.Workbooks;
-            Excel.Workbook sampleWorkbook = workbooks.Add();
-
-            Excel.Worksheet sheet = sampleWorkbook.Sheets.Add();
-
-
-            for (var i = 1; i <= _dbReviews.Count; i++)
+            catch (Exception ea)
             {
-                var r = _dbReviews[i - 1];
-                sheet.Cells[i, 1] = r.Rev_CeneoID + "," +
-                                    r.Rev_Reviewer + "," +
-                                    r.Rev_Advantages + "," +
-                                    r.Rev_Defects + "," +
-                                    r.Rev_Recom + "," +
-                                    r.Rev_Date + "," +
-                                    r.Rev_Rating + "," +
-                                    r.Rev_Content + "," +
-                                    r.Rev_UpVotes + "," +
-                                    r.Rev_DownVotes + ",";
+                Console.WriteLine(ea.ToString());
             }
 
-            _app.Visible = true;
-
         }
 
-        public void GoToWelcomePageClick()
+        public void GetReviewsForProduct(int id)
         {
-            HideAllBut(Views.WelcomePage);
-        }
+            try
+            {
+
+                string sql = "SELECT * FROM Reviews Where Rev_PrdID = " + id;
+
+                SQLiteCommand command = new SQLiteCommand(sql, Connection());
+
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                Log("Connected \nReading stored reviews.");
+
+                int i = 0;
+
+                while (reader.Read())
+                {
+                    i++;
+
+                    DbReview dbReview = new DbReview()
+                    {
+                        Rev_PrdID = Convert.ToInt32(reader["Rev_PrdID"].ToString()),
+                        Rev_ID = Convert.ToInt32(reader["Rev_ID"]),
+                        Rev_Advantages = reader["Rev_Advantages"].ToString(),
+                        Rev_Defects = reader["Rev_Defects"].ToString(),
+                        Rev_Summary = reader["Rev_Summary"].ToString(),
+                        Rev_Rating = reader["Rev_Rating"].ToString(),
+                        Rev_Reviewer = reader["Rev_Reviewer"].ToString(),
+                        Rev_Content = reader["Rev_Content"].ToString(),
+                        Rev_CeneoID = (reader["Rev_CeneoID"].ToString() != "") ? Convert.ToInt32(reader["Rev_CeneoID"]) : 0,
+                        Rev_Date = (reader["Rev_Date"].ToString() != "") ? (DateTime?)DateTime.Parse(reader["Rev_Date"].ToString()) : (DateTime?)null,
+                        Rev_Recom = (reader["Rev_Recom"].ToString() != "") ? reader["Rev_Recom"].ToString() : "",
+                        Rev_DownVotes = (reader["Rev_DownVotes"].ToString() != "") ? Convert.ToInt32(reader["Rev_DownVotes"]) : 0,
+                        Rev_UpVotes = (reader["Rev_UpVotes"].ToString() != "") ? Convert.ToInt32(reader["Rev_UpVotes"]) : 0
+                    };
+
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ProgressText = "" + i;
+                        DbReviews.Add(dbReview);
+                    });
+                    Log("Loaded review: ID = " + Convert.ToInt32(reader["Rev_CeneoID"]));
+
+                }
+            }
+            catch (Exception ea)
+            {
+                MessageBox.Show(ea.ToString());
+            }
+
+
+        }  
+
+
+
+
+
     }
 }

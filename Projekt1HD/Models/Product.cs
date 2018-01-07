@@ -8,9 +8,14 @@ namespace Projekt1HD.Models
 {
     public class Product
     {
-        public string Name { get; set; }
-        public Uri Url { get; set; }
-        public string ProductID { get; set; }
-        public string ReviewsCount { get; set; }
+        public string Prd_Name { get; set; }
+        public string Prd_CeneoID { get; set; }
+        public string Prd_Brand { get; set; }
+        public string Prd_LowerPrice { get; set; }
+        public string Prd_Rating { get; set; }
+        public string Prd_VotesCount { get; set; }
+        public string Prd_ReviewsCount { get; set; }
+        public string Prd_Type { get; set; }
+        public string Prd_Comments { get; set; }
     }
 }

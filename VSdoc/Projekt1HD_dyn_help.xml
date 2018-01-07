@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="Projekt1HD" Title="SOLUTION-WIDE PROPERTIES Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Advantages" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000034.html" LinkGroup="Projekt1HD">Advantages Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.App" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000001.html" LinkGroup="Projekt1HD">App Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.BackToDbProductsCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000069.html" LinkGroup="Projekt1HD">BackToDbProductsCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.BindableStackPanel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000003.html" LinkGroup="Projekt1HD">BindableStackPanel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.RelayCommand.CanExecute" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000091.html" LinkGroup="Projekt1HD">CanExecute Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.RelayCommand.CanExecuteChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008F.html" LinkGroup="Projekt1HD">CanExecuteChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ClearDatabaseClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000080.html" LinkGroup="Projekt1HD">ClearDatabaseClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ClearDatabaseCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000066.html" LinkGroup="Projekt1HD">ClearDatabaseCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Comment" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000005.html" LinkGroup="Projekt1HD">Comment Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.CommentReply" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000009.html" LinkGroup="Projekt1HD">CommentReply Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Comment.CommentString" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000007.html" LinkGroup="Projekt1HD">CommentString Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Comment.Commentator" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000006.html" LinkGroup="Projekt1HD">Commentator Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Comments" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000036.html" LinkGroup="Projekt1HD">Comments Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ConnectWithPageAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000084.html" LinkGroup="Projekt1HD">ConnectWithPageAsync Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.Connection" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000089.html" LinkGroup="Projekt1HD">Connection Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.CommentReply.Content" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000B.html" LinkGroup="Projekt1HD">Content Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.CurrentPage" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000071.html" LinkGroup="Projekt1HD">CurrentPage Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000048.html" LinkGroup="Projekt1HD">DataViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DataViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000078.html" LinkGroup="Projekt1HD">DataViewModel Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Date" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003A.html" LinkGroup="Projekt1HD">Date Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000C.html" LinkGroup="Projekt1HD">DbProduct Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbProductClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007D.html" LinkGroup="Projekt1HD">DbProductClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbProductClickCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000068.html" LinkGroup="Projekt1HD">DbProductClickCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbProducts" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006C.html" LinkGroup="Projekt1HD">DbProducts Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbProductsVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005A.html" LinkGroup="Projekt1HD">DbProductsVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000013.html" LinkGroup="Projekt1HD">DbReview Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbReviews" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006D.html" LinkGroup="Projekt1HD">DbReviews Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.DbReviewsVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000059.html" LinkGroup="Projekt1HD">DbReviewsVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Defects" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000035.html" LinkGroup="Projekt1HD">Defects Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.ECount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000043.html" LinkGroup="Projekt1HD">ECount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ETLClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000079.html" LinkGroup="Projekt1HD">ETLClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ETLCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000067.html" LinkGroup="Projekt1HD">ETLCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.ETime" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000040.html" LinkGroup="Projekt1HD">ETime Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.RelayCommand.Execute" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000092.html" LinkGroup="Projekt1HD">Execute Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ExportToCSV" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008C.html" LinkGroup="Projekt1HD">ExportToCSV Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ExportToCSVCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006A.html" LinkGroup="Projekt1HD">ExportToCSVCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ExtractClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007A.html" LinkGroup="Projekt1HD">ExtractClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ExtractData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000085.html" LinkGroup="Projekt1HD">ExtractData Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ExtractDataCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000062.html" LinkGroup="Projekt1HD">ExtractDataCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.GetProductsOnPage" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000088.html" LinkGroup="Projekt1HD">GetProductsOnPage Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.GetReviewsForProduct" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007E.html" LinkGroup="Projekt1HD">GetReviewsForProduct Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.GoToWelcomePageClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008D.html" LinkGroup="Projekt1HD">GoToWelcomePageClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.GoToWelcomePageCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006B.html" LinkGroup="Projekt1HD">GoToWelcomePageCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.HasStageESucced" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006F.html" LinkGroup="Projekt1HD">HasStageESucced Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.IsEAllowed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000074.html" LinkGroup="Projekt1HD">IsEAllowed Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.IsEnabledNextButton" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000006E.html" LinkGroup="Projekt1HD">IsEnabledNextButton Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.IsLAllowed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000076.html" LinkGroup="Projekt1HD">IsLAllowed Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.IsReviewInserted" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000021.html" LinkGroup="Projekt1HD">IsReviewInserted Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.IsSearchByIdChecked" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000073.html" LinkGroup="Projekt1HD">IsSearchByIdChecked Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.IsTAllowed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000075.html" LinkGroup="Projekt1HD">IsTAllowed Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.LCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000045.html" LinkGroup="Projekt1HD">LCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.LTime" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000042.html" LinkGroup="Projekt1HD">LTime Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.LoadClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007C.html" LinkGroup="Projekt1HD">LoadClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.LoadDataCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000064.html" LinkGroup="Projekt1HD">LoadDataCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.LoadingSpinnerVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005C.html" LinkGroup="Projekt1HD">LoadingSpinnerVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.LockETLProcess" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000082.html" LinkGroup="Projekt1HD">LockETLProcess Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.Log" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000083.html" LinkGroup="Projekt1HD">Log Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.LogText" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000054.html" LinkGroup="Projekt1HD">LogText Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.MainWindow" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000093.html" LinkGroup="Projekt1HD">MainWindow Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.MainWindow.MainWindow" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000094.html" LinkGroup="Projekt1HD">MainWindow Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Product.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002E.html" LinkGroup="Projekt1HD">Name Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.NextPageCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005F.html" LinkGroup="Projekt1HD">NextPageCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.PageCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000070.html" LinkGroup="Projekt1HD">PageCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000022.html" LinkGroup="Projekt1HD">PrdDetails Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.PrdPanel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000049.html" LinkGroup="Projekt1HD">PrdPanel Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_Brand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000010.html" LinkGroup="Projekt1HD">Prd_Brand Property {Projekt1HD.Models.DbProduct}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Brand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000025.html" LinkGroup="Projekt1HD">Prd_Brand Property {Projekt1HD.Models.PrdDetails}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_CeneoID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000E.html" LinkGroup="Projekt1HD">Prd_CeneoID Property {Projekt1HD.Models.DbProduct}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_CeneoID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000024.html" LinkGroup="Projekt1HD">Prd_CeneoID Property {Projekt1HD.Models.PrdDetails}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_Comments" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000012.html" LinkGroup="Projekt1HD">Prd_Comments Property {Projekt1HD.Models.DbProduct}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Comments" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002B.html" LinkGroup="Projekt1HD">Prd_Comments Property {Projekt1HD.Models.PrdDetails}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_ID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000D.html" LinkGroup="Projekt1HD">Prd_ID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_LowerPrice" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000026.html" LinkGroup="Projekt1HD">Prd_LowerPrice Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_Model" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000011.html" LinkGroup="Projekt1HD">Prd_Model Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000023.html" LinkGroup="Projekt1HD">Prd_Name Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Rating" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000027.html" LinkGroup="Projekt1HD">Prd_Rating Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Reviews" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002C.html" LinkGroup="Projekt1HD">Prd_Reviews Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_ReviewsCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000029.html" LinkGroup="Projekt1HD">Prd_ReviewsCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbProduct.Prd_Type" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000F.html" LinkGroup="Projekt1HD">Prd_Type Property {Projekt1HD.Models.DbProduct}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_Type" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002A.html" LinkGroup="Projekt1HD">Prd_Type Property {Projekt1HD.Models.PrdDetails}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.PrdDetails.Prd_VotesCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000028.html" LinkGroup="Projekt1HD">Prd_VotesCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.PreviousPageCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000060.html" LinkGroup="Projekt1HD">PreviousPageCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProcessButtonsPanelBorderBrushColor" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000056.html" LinkGroup="Projekt1HD">ProcessButtonsPanelBorderBrushColor Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Product" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002D.html" LinkGroup="Projekt1HD">Product Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProductClickCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000061.html" LinkGroup="Projekt1HD">ProductClickCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProductCollection" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000004A.html" LinkGroup="Projekt1HD">ProductCollection Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Product.ProductID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000030.html" LinkGroup="Projekt1HD">ProductID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProductId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000072.html" LinkGroup="Projekt1HD">ProductId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProductWithReviewsVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000058.html" LinkGroup="Projekt1HD">ProductWithReviewsVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Product_Recommended" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000037.html" LinkGroup="Projekt1HD">Product_Recommended Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProductsVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000057.html" LinkGroup="Projekt1HD">ProductsVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ProgressText" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000055.html" LinkGroup="Projekt1HD">ProgressText Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000000.html" LinkGroup="Projekt1HD">Projekt1HD Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000002.html" LinkGroup="Projekt1HD">Projekt1HD.Models Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000047.html" LinkGroup="Projekt1HD">Projekt1HD.ViewModels Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Rating" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003C.html" LinkGroup="Projekt1HD">Rating Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.RelayCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008E.html" LinkGroup="Projekt1HD">RelayCommand Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.RelayCommand.RelayCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000090.html" LinkGroup="Projekt1HD">RelayCommand Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Comment.Replies" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000008.html" LinkGroup="Projekt1HD">Replies Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.CommentReply.Respondent" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000000A.html" LinkGroup="Projekt1HD">Respondent Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Advantages" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000017.html" LinkGroup="Projekt1HD">Rev_Advantages Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_CeneoID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000015.html" LinkGroup="Projekt1HD">Rev_CeneoID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Content" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000020.html" LinkGroup="Projekt1HD">Rev_Content Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Date" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001C.html" LinkGroup="Projekt1HD">Rev_Date Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Defects" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000018.html" LinkGroup="Projekt1HD">Rev_Defects Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_DownVotes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001F.html" LinkGroup="Projekt1HD">Rev_DownVotes Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_ID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000014.html" LinkGroup="Projekt1HD">Rev_ID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_PrdID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000016.html" LinkGroup="Projekt1HD">Rev_PrdID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Rating" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001A.html" LinkGroup="Projekt1HD">Rev_Rating Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Recom" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001D.html" LinkGroup="Projekt1HD">Rev_Recom Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Reviewer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001B.html" LinkGroup="Projekt1HD">Rev_Reviewer Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_Summary" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000019.html" LinkGroup="Projekt1HD">Rev_Summary Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.DbReview.Rev_UpVotes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000001E.html" LinkGroup="Projekt1HD">Rev_UpVotes Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000032.html" LinkGroup="Projekt1HD">Review Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Review_ID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000039.html" LinkGroup="Projekt1HD">Review_ID Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Review_Text" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000038.html" LinkGroup="Projekt1HD">Review_Text Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Reviewer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000033.html" LinkGroup="Projekt1HD">Reviewer Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Product.ReviewsCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000031.html" LinkGroup="Projekt1HD">ReviewsCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="SOLUTION-WIDE PROPERTIES Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000095.html" LinkGroup="Projekt1HD">SOLUTION-WIDE PROPERTIES Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.SearchCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005E.html" LinkGroup="Projekt1HD">SearchCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.SearchProduct" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000081.html" LinkGroup="Projekt1HD">SearchProduct Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.SearchProducts" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000087.html" LinkGroup="Projekt1HD">SearchProducts Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.SearchString" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000053.html" LinkGroup="Projekt1HD">SearchString Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ShowDatabaseClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007F.html" LinkGroup="Projekt1HD">ShowDatabaseClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ShowDatabaseCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000065.html" LinkGroup="Projekt1HD">ShowDatabaseCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.ShowReview" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008A.html" LinkGroup="Projekt1HD">ShowReview Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003F.html" LinkGroup="Projekt1HD">Statistics Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.BindableStackPanel.StkPanel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000004.html" LinkGroup="Projekt1HD">StkPanel Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Summary" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003B.html" LinkGroup="Projekt1HD">Summary Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.TCount" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000044.html" LinkGroup="Projekt1HD">TCount Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Statistics.TTime" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000041.html" LinkGroup="Projekt1HD">TTime Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.TransformClick" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000007B.html" LinkGroup="Projekt1HD">TransformClick Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.TransformData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000086.html" LinkGroup="Projekt1HD">TransformData Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.TransformDataCommand" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000063.html" LinkGroup="Projekt1HD">TransformDataCommand Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.TransformString" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000008B.html" LinkGroup="Projekt1HD">TransformString Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.TransformedDataVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005B.html" LinkGroup="Projekt1HD">TransformedDataVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Product.Url" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000002F.html" LinkGroup="Projekt1HD">Url Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.Views" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000004B.html" LinkGroup="Projekt1HD">Views Enumeration</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Votes_No" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003E.html" LinkGroup="Projekt1HD">Votes_No Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.Models.Review.Votes_Yes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000003D.html" LinkGroup="Projekt1HD">Votes_Yes Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.WelcomePageVisibility" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_000000000000005D.html" LinkGroup="Projekt1HD">WelcomePageVisibility Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="Projekt1HD.ViewModels.DataViewModel.htmlDoc" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:Projekt1HD.chm::/topic_0000000000000077.html" LinkGroup="Projekt1HD">htmlDoc Field</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+
