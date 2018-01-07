@@ -241,7 +241,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PUksysQ/pDKgQzQaaGA9MEu+CqqW4Aja3VZzMuzt3AE=</dsig:DigestValue>
+        <dsig:DigestValue>V0Q47gVdAA1TLSjaiqJshdOhPkXVdnUe0DNANALhuX0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -293,13 +293,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Projekt1HD.exe.config" size="2175">
+  <file name="Projekt1HD.exe.config" size="2164">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>28qZHrvpc1wWyW2J50xYxF75koja/z8Otlb0+6mF5po=</dsig:DigestValue>
+      <dsig:DigestValue>rRFfMiuN2ITwmvJWLIg1J1vuNFIdwFfGrt+6ivrcolc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
