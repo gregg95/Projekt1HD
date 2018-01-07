@@ -239,6 +239,18 @@ namespace Projekt1HD.ViewModels
             }
         }
 
+        private bool _areButtonsEnabled;
+        public bool AreButtonsEnabled
+        {
+            get { return _areButtonsEnabled; }
+            set
+            {
+                _areButtonsEnabled = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+
         private bool _hasStageESucced;
         public bool HasStageESucced
         {
@@ -366,6 +378,7 @@ namespace Projekt1HD.ViewModels
 
 
 
+            AreButtonsEnabled = true;
             IsEAllowed = false;
             IsTAllowed = false;
             IsLAllowed = false;
@@ -449,6 +462,12 @@ namespace Projekt1HD.ViewModels
 
         private void SearchClick()
         {
+            IsEAllowed = false;
+            IsTAllowed = false;
+            IsLAllowed = false;
+
+            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
+
             ProgressText = "";
             LoadingSpinnerVisibility = Visibility.Visible;
 
@@ -664,7 +683,7 @@ namespace Projekt1HD.ViewModels
                 {
                     FontSize = 30,
                     FontWeight = FontWeights.Bold,
-                    Foreground = Brushes.LightGreen,
+                    Foreground = Brushes.Green,
                     Text = "Product found!\n"
                 });
 
@@ -1362,6 +1381,7 @@ namespace Projekt1HD.ViewModels
 
         public async void ETLClick()
         {
+            AreButtonsEnabled = false;
             LoadingSpinnerVisibility = Visibility.Visible;
             IsEAllowed = false;
             IsTAllowed = false;
@@ -1376,12 +1396,14 @@ namespace Projekt1HD.ViewModels
 
 
             LoadingSpinnerVisibility = Visibility.Hidden;
+            AreButtonsEnabled = true;
             ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
         }
 
         public async void ExtractClick()
         {
 
+            AreButtonsEnabled = false;
             LoadingSpinnerVisibility = Visibility.Visible;
             IsEAllowed = false;
 
@@ -1389,12 +1411,14 @@ namespace Projekt1HD.ViewModels
             bool xasd = await t;
 
             IsTAllowed = true;
+            AreButtonsEnabled = true;
             LoadingSpinnerVisibility = Visibility.Hidden;
 
         }
 
         public async void TransformClick()
         {
+            AreButtonsEnabled = false;
             LoadingSpinnerVisibility = Visibility.Visible;
             IsTAllowed = false;
 
@@ -1402,16 +1426,19 @@ namespace Projekt1HD.ViewModels
 
 
             IsLAllowed = true;
+            AreButtonsEnabled = true;
             LoadingSpinnerVisibility = Visibility.Hidden;
         }
 
         public async void LoadClick()
         {
+            AreButtonsEnabled = false;
             LoadingSpinnerVisibility = Visibility.Visible;
             IsLAllowed = false;
 
             await Task.Run(() => LoadData());
 
+            AreButtonsEnabled = true;
             ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
             LoadingSpinnerVisibility = Visibility.Hidden;
         }
@@ -1471,6 +1498,12 @@ namespace Projekt1HD.ViewModels
         
         public void ShowDatabaseClick()
         {
+            IsEAllowed = false;
+            IsTAllowed = false;
+            IsLAllowed = false;
+
+            ProcessButtonsPanelBorderBrushColor = Brushes.Pink;
+
             HideAllBut(Views.DbProducts);
 
 

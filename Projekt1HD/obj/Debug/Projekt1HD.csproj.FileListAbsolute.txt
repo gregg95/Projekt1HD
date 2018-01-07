@@ -47,3 +47,7 @@ C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Microsoft.Win
 C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
 C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Projekt1HD.exe.manifest
+C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\bin\Debug\Projekt1HD.application
+C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\obj\Debug\Projekt1HD.exe.manifest
+C:\Users\Grzegorz\Documents\GitHub\Projekt1HD\Projekt1HD\obj\Debug\Projekt1HD.application
