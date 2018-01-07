@@ -261,7 +261,7 @@ namespace Projekt1HD {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Projekt1HD;component/views/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/RevViewer;component/views/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Views\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
